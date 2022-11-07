@@ -1,6 +1,8 @@
 import { PaperBook } from "./PaperBook";
 import { Ebook } from "./Ebook";
 
+let isbnPattern = /^[0-9]{13}$/;
+
 export interface Book {
     title : string;
     price : number;
@@ -12,7 +14,6 @@ export interface Book {
 
 let konyvek: Book[] = [];
 let ellenorzo = false;
-let element : HTMLInputElement;
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,102 +30,102 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Ebook könyv ellenőrzés és feltöltés
     document.getElementById('ebookbutton')?.addEventListener('click', () => {
+        ellenorzo = false;
 
         //title
-        element = document.getElementById('ebooktitle')as HTMLInputElement;
-        if(element.value != ""){
-            joAdat(element)
-            ellenorzo = true;
-        }else{
-            rosszAdat(element)
-            ellenorzo = false;
-        }
+        let cim : HTMLInputElement = document.getElementById('ebooktitle')as HTMLInputElement;
+        if(cim.value != ""){
+            joAdat(cim)
+        }else rosszAdat(cim)
 
         //price
-        element = document.getElementById('ebookprice')as HTMLInputElement;
-        if(parseInt(element.value) > -1){
-            joAdat(element)
-            ellenorzo = true;
-        }else{
-            rosszAdat(element)
-            ellenorzo = false;
-        }
+        let ar : HTMLInputElement = document.getElementById('ebookprice')as HTMLInputElement;
+        if(parseInt(ar.value) > -1){
+            joAdat(ar)
+        }else rosszAdat(ar)
 
         //isbn
-        element = document.getElementById('ebookisbn')as HTMLInputElement;
-        if(element.value.length == 13){
-            joAdat(element)
-            ellenorzo = true;
+        let joazonosito = false;
+        let azonosito : HTMLInputElement = document.getElementById('ebookisbn')as HTMLInputElement;
+        if(isbnPattern.test(azonosito.value)){
+            joAdat(azonosito)
+            joazonosito = true;
         }else{
-            rosszAdat(element)
-            ellenorzo = false;
+            rosszAdat(azonosito)
+            joazonosito = false;
         }
 
-        //weight
-        element = document.getElementById('ebooksize')as HTMLInputElement
-        if(parseInt(element.value) > 0){
-            joAdat(element)
-            ellenorzo = true;
-        }else{
-            rosszAdat(element)
-            ellenorzo = false;
+        //size
+        let size : HTMLInputElement = document.getElementById('ebooksize')as HTMLInputElement
+        if(parseInt(size.value) > 0){
+            joAdat(size)
+        }else rosszAdat(size)
+
+        if(ellenorzo && joazonosito){
+            console.log("sikeres ebook");
+            konyvek.push(new Ebook(cim.value,parseInt(ar.value), azonosito.value, parseInt(size.value)));
+            cim.value = "";
+            ar.value = "";
+            azonosito.value = "";
+            size.value = "";
         }
     })
 
     //Papír alapú könyv ellenőrzés és feltöltés
     document.getElementById('paperbutton')?.addEventListener('click', () => {
+        ellenorzo = false;
 
         //title
-        element = document.getElementById('paperbooktitle')as HTMLInputElement;
-        if(element.value != ""){
-            joAdat(element)
-            ellenorzo = true;
-        }else{
-            rosszAdat(element)
-            ellenorzo = false;
-        }
+        let cim : HTMLInputElement = document.getElementById('paperbooktitle')as HTMLInputElement;
+        if(cim.value != ""){
+            joAdat(cim)
+        }else rosszAdat(cim)
 
         //price
-        element = document.getElementById('paperbookprice')as HTMLInputElement;
-        if(parseInt(element.value) > -1){
-            joAdat(element)
-            ellenorzo = true;
-        }else{
-            rosszAdat(element)
-            ellenorzo = false;
-        }
+        let ar : HTMLInputElement = document.getElementById('paperbookprice')as HTMLInputElement;
+        if(parseInt(ar.value) > -1){
+            joAdat(ar)
+        }else rosszAdat(ar)
 
         //isbn
-        element = document.getElementById('paperbookisbn')as HTMLInputElement;
-        if(element.value.length == 13){
-            joAdat(element)
-            ellenorzo = true;
+        let joazonosito = false;
+        let azonosito : HTMLInputElement = document.getElementById('paperbookisbn')as HTMLInputElement;
+        if(isbnPattern.test(azonosito.value)){
+            joAdat(azonosito)
+            joazonosito = true;
         }else{
-            rosszAdat(element)
-            ellenorzo = false;
+            rosszAdat(azonosito)
+            joazonosito = false;
         }
 
         //weight
-        element = document.getElementById('paperbookweight')as HTMLInputElement
-        if(parseInt(element.value) > 0){
-            joAdat(element)
-            ellenorzo = true;
-        }else{
-            rosszAdat(element)
-            ellenorzo = false;
+        let suly : HTMLInputElement = document.getElementById('paperbookweight')as HTMLInputElement
+        if(parseInt(suly.value) > 0){
+            joAdat(suly)
+        }else rosszAdat(suly)
+
+        if(ellenorzo){
+            console.log("sikeres paper");
+            konyvek.push(new PaperBook(cim.value,parseInt(ar.value), azonosito.value, parseInt(suly.value)));
+            cim.value = "";
+            ar.value = "";
+            azonosito.value = "";
+            suly.value = "";
         }
     })
 
 
 
-    //rossz adat esetén piros border
+    //rossz adat esetén piros border + ellenorzo
     function rosszAdat (adat : HTMLInputElement){
         adat.style.border = "1px solid red";
+        ellenorzo = false;
     }
 
-    //joadat esetén alapértelmezett border
+    //joadat esetén alapértelmezett border + ellenorzo
     function joAdat(adat: HTMLInputElement){
         adat.style.border = "1px solid #ced4da";
+        ellenorzo = true;
     }
 
 });

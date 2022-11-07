@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const PaperBook_1 = require("./PaperBook");
+const Ebook_1 = require("./Ebook");
+let isbnPattern = /^[0-9]{13}$/;
 let konyvek = [];
 let ellenorzo = false;
-let element;
 document.addEventListener("DOMContentLoaded", () => {
     var _a, _b, _c;
     document.getElementById("paperbook").style.display = "none";
@@ -18,96 +20,100 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     //Ebook könyv ellenőrzés és feltöltés
     (_b = document.getElementById('ebookbutton')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => {
+        ellenorzo = false;
         //title
-        element = document.getElementById('ebooktitle');
-        if (element.value != "") {
-            joAdat(element);
-            ellenorzo = true;
+        let cim = document.getElementById('ebooktitle');
+        if (cim.value != "") {
+            joAdat(cim);
         }
-        else {
-            rosszAdat(element);
-            ellenorzo = false;
-        }
+        else
+            rosszAdat(cim);
         //price
-        element = document.getElementById('ebookprice');
-        if (parseInt(element.value) > -1) {
-            joAdat(element);
-            ellenorzo = true;
+        let ar = document.getElementById('ebookprice');
+        if (parseInt(ar.value) > -1) {
+            joAdat(ar);
         }
-        else {
-            rosszAdat(element);
-            ellenorzo = false;
-        }
+        else
+            rosszAdat(ar);
         //isbn
-        element = document.getElementById('ebookisbn');
-        if (element.value.length == 13) {
-            joAdat(element);
-            ellenorzo = true;
+        let joazonosito = false;
+        let azonosito = document.getElementById('ebookisbn');
+        if (isbnPattern.test(azonosito.value)) {
+            joAdat(azonosito);
+            joazonosito = true;
         }
         else {
-            rosszAdat(element);
-            ellenorzo = false;
+            rosszAdat(azonosito);
+            joazonosito = false;
         }
-        //weight
-        element = document.getElementById('ebooksize');
-        if (parseInt(element.value) > 0) {
-            joAdat(element);
-            ellenorzo = true;
+        //size
+        let size = document.getElementById('ebooksize');
+        if (parseInt(size.value) > 0) {
+            joAdat(size);
         }
-        else {
-            rosszAdat(element);
-            ellenorzo = false;
+        else
+            rosszAdat(size);
+        if (ellenorzo && joazonosito) {
+            console.log("sikeres ebook");
+            konyvek.push(new Ebook_1.Ebook(cim.value, parseInt(ar.value), azonosito.value, parseInt(size.value)));
+            cim.value = "";
+            ar.value = "";
+            azonosito.value = "";
+            size.value = "";
         }
     });
     //Papír alapú könyv ellenőrzés és feltöltés
     (_c = document.getElementById('paperbutton')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', () => {
+        ellenorzo = false;
         //title
-        element = document.getElementById('paperbooktitle');
-        if (element.value != "") {
-            joAdat(element);
-            ellenorzo = true;
+        let cim = document.getElementById('paperbooktitle');
+        if (cim.value != "") {
+            joAdat(cim);
         }
-        else {
-            rosszAdat(element);
-            ellenorzo = false;
-        }
+        else
+            rosszAdat(cim);
         //price
-        element = document.getElementById('paperbookprice');
-        if (parseInt(element.value) > -1) {
-            joAdat(element);
-            ellenorzo = true;
+        let ar = document.getElementById('paperbookprice');
+        if (parseInt(ar.value) > -1) {
+            joAdat(ar);
         }
-        else {
-            rosszAdat(element);
-            ellenorzo = false;
-        }
+        else
+            rosszAdat(ar);
         //isbn
-        element = document.getElementById('paperbookisbn');
-        if (element.value.length == 13) {
-            joAdat(element);
-            ellenorzo = true;
+        let joazonosito = false;
+        let azonosito = document.getElementById('paperbookisbn');
+        if (isbnPattern.test(azonosito.value)) {
+            joAdat(azonosito);
+            joazonosito = true;
         }
         else {
-            rosszAdat(element);
-            ellenorzo = false;
+            rosszAdat(azonosito);
+            joazonosito = false;
         }
         //weight
-        element = document.getElementById('paperbookweight');
-        if (parseInt(element.value) > 0) {
-            joAdat(element);
-            ellenorzo = true;
+        let suly = document.getElementById('paperbookweight');
+        if (parseInt(suly.value) > 0) {
+            joAdat(suly);
         }
-        else {
-            rosszAdat(element);
-            ellenorzo = false;
+        else
+            rosszAdat(suly);
+        if (ellenorzo) {
+            console.log("sikeres paper");
+            konyvek.push(new PaperBook_1.PaperBook(cim.value, parseInt(ar.value), azonosito.value, parseInt(suly.value)));
+            cim.value = "";
+            ar.value = "";
+            azonosito.value = "";
+            suly.value = "";
         }
     });
-    //rossz adat esetén piros border
+    //rossz adat esetén piros border + ellenorzo
     function rosszAdat(adat) {
         adat.style.border = "1px solid red";
+        ellenorzo = false;
     }
-    //joadat esetén alapértelmezett border
+    //joadat esetén alapértelmezett border + ellenorzo
     function joAdat(adat) {
         adat.style.border = "1px solid #ced4da";
+        ellenorzo = true;
     }
 });
