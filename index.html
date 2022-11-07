@@ -7,19 +7,113 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script src="dist/main.js"></script>
         <link rel="stylesheet" href="style.css" />
-        <link
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-          crossorigin="anonymous"
-        />
-        <script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-          crossorigin="anonymous"
-        ></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
       </head>
 <body>
-    
+  <div class="container">
+    <!--selector-->
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <input type="radio" name="konyvtipus" id="ebookradio" checked>
+        <label for="ebookradio">Ebook</label>
+        <input type="radio" name="konyvtipus" id="paperbookradio">
+        <label for="paperbookradio">PaperBook</label>
+        <button id="valasztas">Choose</button>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+
+    <div class="col-2 col-sm-2 col-md-3 col-lg-4"></div>
+
+    <!--Ebook form-->
+
+    <div id="ebook" class="col-8 col-sm-8 col-md-6 col-lg-4">
+      <h1>Ebook</h1>
+      <!--Title-->
+      <div class="row">
+        <div class="col-4 col-sm-6 col-md-6 col-lg-6">
+          <label>Title:</label>
+        </div>
+        <div class="col-8 col-sm-6 col-md-6 col-lg-6">
+          <input type="text" class="form-control" id="ebooktitle" placeholder="Title"/>
+        </div>
+      </div>
+      <!--Price-->
+      <div class="row">
+        <div class="col-4 col-sm-6 col-md-6 col-lg-6">
+          <label>Price:</label>
+        </div>
+        <div class="col-8 col-sm-6 col-md-6 col-lg-6">
+          <input type="text" class="form-control" id="ebookprice" placeholder="Price"/>
+        </div>
+      </div>
+      <!--isbn-->
+      <div class="row">
+        <div class="col-4 col-sm-6 col-md-6 col-lg-6">
+          <label>Isbn:</label>
+        </div>
+        <div class="col-8 col-sm-6 col-md-6 col-lg-6">
+          <input type="number" class="form-control" id="ebookisbn" placeholder="Isbn"/>
+        </div>
+      </div>
+      <!--Size-->
+      <div class="row">
+        <div class="col-4 col-sm-6 col-md-6 col-lg-6">
+          <label>Size:</label>
+        </div>
+        <div class="col-8 col-sm-6 col-md-6 col-lg-6">
+          <input type="number" class="form-control" id="ebooksize" placeholder="Size"/>
+        </div>
+      </div>
+    </div>
+
+    <!--Paperbook form-->
+
+    <div id="paperbook" class="col-8 col-sm-8 col-md-6 col-lg-4">
+      <h1>PaperBook</h1>
+      <!--Title-->
+      <div class="row">
+        <div class="col-4 col-sm-6 col-md-6 col-lg-6">
+          <label>Title:</label>
+        </div>
+        <div class="col-8 col-sm-6 col-md-6 col-lg-6">
+          <input type="text" class="form-control" id="paperbooktitle" placeholder="Title"/>
+        </div>
+      </div>
+      <!--Price-->
+      <div class="row">
+        <div class="col-4 col-sm-6 col-md-6 col-lg-6">
+          <label>Price:</label>
+        </div>
+        <div class="col-8 col-sm-6 col-md-6 col-lg-6">
+          <input type="text" class="form-control" id="paperbookprice" placeholder="Price"/>
+        </div>
+      </div>
+      <!--isbn-->
+      <div class="row">
+        <div class="col-4 col-sm-6 col-md-6 col-lg-6">
+          <label>Isbn:</label>
+        </div>
+        <div class="col-8 col-sm-6 col-md-6 col-lg-6">
+          <input type="number" class="form-control" id="paperbookisbn" placeholder="Isbn"/>
+        </div>
+      </div>
+      <!--Size-->
+      <div class="row">
+        <div class="col-4 col-sm-6 col-md-6 col-lg-6">
+          <label>Weight:</label>
+        </div>
+        <div class="col-8 col-sm-6 col-md-6 col-lg-6">
+          <input type="number" class="form-control" id="paperbookweight" placeholder="Weight"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-2 col-sm-2 col-md-3 col-lg-4"></div>
+
+  </div>    
 </body>
 </html>
+
