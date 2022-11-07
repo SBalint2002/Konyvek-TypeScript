@@ -60,6 +60,19 @@ document.addEventListener("DOMContentLoaded", () => {
             ar.value = "";
             azonosito.value = "";
             size.value = "";
+            document.getElementById('konyvszam').textContent = String(konyvek.length);
+            let ingyen = 0;
+            for (let i = 0; i < konyvek.length; i++) {
+                if (konyvek[i].price == 0) {
+                    ingyen++;
+                }
+            }
+            document.getElementById('ingyenkonyvszam').textContent = String(ingyen);
+            let osszar = 0;
+            for (let i = 0; i < konyvek.length; i++) {
+                osszar += konyvek[i].price;
+            }
+            document.getElementById('konyvar').textContent = String(osszar);
         }
     });
     //Papír alapú könyv ellenőrzés és feltöltés
@@ -104,6 +117,19 @@ document.addEventListener("DOMContentLoaded", () => {
             ar.value = "";
             azonosito.value = "";
             suly.value = "";
+            document.getElementById('konyvszam').textContent = String(konyvek.length);
+            let ingyen = 0;
+            for (let i = 0; i < konyvek.length; i++) {
+                if (konyvek[i].price == 0) {
+                    ingyen++;
+                }
+            }
+            document.getElementById('ingyenkonyvszam').textContent = String(ingyen);
+            let osszar = 0;
+            for (let i = 0; i < konyvek.length; i++) {
+                osszar += konyvek[i].price;
+            }
+            document.getElementById('konyvar').textContent = String(osszar);
         }
     });
     //rossz adat esetén piros border + ellenorzo

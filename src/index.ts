@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
+
     //Ebook könyv ellenőrzés és feltöltés
     document.getElementById('ebookbutton')?.addEventListener('click', () => {
         ellenorzo = false;
@@ -68,6 +69,20 @@ document.addEventListener("DOMContentLoaded", () => {
             ar.value = "";
             azonosito.value = "";
             size.value = "";
+
+            (document.getElementById('konyvszam') as HTMLElement).textContent = String(konyvek.length);
+            let ingyen = 0;
+            for(let i = 0; i < konyvek.length; i++){
+                if(konyvek[i].price == 0){
+                    ingyen++;
+                }
+            }
+            (document.getElementById('ingyenkonyvszam') as HTMLElement).textContent = String(ingyen);
+            let osszar = 0;
+            for(let i = 0; i < konyvek.length; i++){
+                osszar += konyvek[i].price;
+            }
+            (document.getElementById('konyvar') as HTMLElement).textContent = String(osszar);
         }
     })
 
@@ -111,6 +126,20 @@ document.addEventListener("DOMContentLoaded", () => {
             ar.value = "";
             azonosito.value = "";
             suly.value = "";
+
+            (document.getElementById('konyvszam') as HTMLElement).textContent = String(konyvek.length);
+            let ingyen = 0;
+            for(let i = 0; i < konyvek.length; i++){
+                if(konyvek[i].price == 0){
+                    ingyen++;
+                }
+            }
+            (document.getElementById('ingyenkonyvszam') as HTMLElement).textContent = String(ingyen);
+            let osszar = 0;
+            for(let i = 0; i < konyvek.length; i++){
+                osszar += konyvek[i].price;
+            }
+            (document.getElementById('konyvar') as HTMLElement).textContent = String(osszar);
         }
     })
 
