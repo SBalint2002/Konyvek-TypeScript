@@ -13,7 +13,6 @@ export interface Book {
 }
 
 let konyvek: Book[] = [];
-let ellenorzo = false;
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -31,19 +30,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Ebook könyv ellenőrzés és feltöltés
     document.getElementById('ebookbutton')?.addEventListener('click', () => {
-        ellenorzo = false;
 
         //title
+        let jocim = false;
         let cim : HTMLInputElement = document.getElementById('ebooktitle')as HTMLInputElement;
         if(cim.value != ""){
-            joAdat(cim)
-        }else rosszAdat(cim)
+            joAdat(cim);
+            jocim = true;
+        }else{
+            rosszAdat(cim);
+            jocim = false;
+        }
 
         //price
+        let joar = false;
         let ar : HTMLInputElement = document.getElementById('ebookprice')as HTMLInputElement;
         if(parseInt(ar.value) > -1){
             joAdat(ar)
-        }else rosszAdat(ar)
+            joar = true;
+        }else{
+            rosszAdat(ar);
+            joar = false;
+        } 
 
         //isbn
         let joazonosito = false;
@@ -57,12 +65,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         //size
+        let jomeret = false;
         let size : HTMLInputElement = document.getElementById('ebooksize')as HTMLInputElement
         if(parseInt(size.value) > 0){
             joAdat(size)
-        }else rosszAdat(size)
+            jomeret = true;
+        }else{
+            rosszAdat(size)
+            jomeret = false;
+        }
 
-        if(ellenorzo && joazonosito){
+        if(jocim && joar && joazonosito && jomeret){
             console.log("sikeres ebook");
             konyvek.push(new Ebook(cim.value,parseInt(ar.value), azonosito.value, parseInt(size.value)));
             cim.value = "";
@@ -88,19 +101,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Papír alapú könyv ellenőrzés és feltöltés
     document.getElementById('paperbutton')?.addEventListener('click', () => {
-        ellenorzo = false;
 
         //title
+        let jocim = false;
         let cim : HTMLInputElement = document.getElementById('paperbooktitle')as HTMLInputElement;
         if(cim.value != ""){
-            joAdat(cim)
-        }else rosszAdat(cim)
+            joAdat(cim);
+            jocim = true;
+        }else{
+            rosszAdat(cim);
+            jocim = false;
+        }
 
         //price
+        let joar = false;
         let ar : HTMLInputElement = document.getElementById('paperbookprice')as HTMLInputElement;
         if(parseInt(ar.value) > -1){
             joAdat(ar)
-        }else rosszAdat(ar)
+            joar = true;
+        }else{
+            rosszAdat(ar);
+            joar = false;
+        } 
 
         //isbn
         let joazonosito = false;
@@ -114,12 +136,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         //weight
+        let josuly = false;
         let suly : HTMLInputElement = document.getElementById('paperbookweight')as HTMLInputElement
         if(parseInt(suly.value) > 0){
             joAdat(suly)
-        }else rosszAdat(suly)
+            josuly = true;
+        }else{
+            rosszAdat(suly)
+            josuly = false;
+        }
 
-        if(ellenorzo){
+        if(jocim && joar && joazonosito && josuly){
             console.log("sikeres paper");
             konyvek.push(new PaperBook(cim.value,parseInt(ar.value), azonosito.value, parseInt(suly.value)));
             cim.value = "";
