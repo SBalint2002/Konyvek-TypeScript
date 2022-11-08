@@ -175,13 +175,11 @@ document.addEventListener("DOMContentLoaded", () => {
     //rossz adat esetén piros border + ellenorzo
     function rosszAdat (adat : HTMLInputElement){
         adat.style.border = "1px solid red";
-        ellenorzo = false;
     }
 
     //joadat esetén alapértelmezett border + ellenorzo
     function joAdat(adat: HTMLInputElement){
         adat.style.border = "1px solid #ced4da";
-        ellenorzo = true;
     }
 
 });

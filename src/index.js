@@ -4,7 +4,6 @@ const PaperBook_1 = require("./PaperBook");
 const Ebook_1 = require("./Ebook");
 let isbnPattern = /^[0-9]{13}$/;
 let konyvek = [];
-let ellenorzo = false;
 document.addEventListener("DOMContentLoaded", () => {
     var _a, _b, _c;
     document.getElementById("paperbook").style.display = "none";
@@ -20,21 +19,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     //Ebook könyv ellenőrzés és feltöltés
     (_b = document.getElementById('ebookbutton')) === null || _b === void 0 ? void 0 : _b.addEventListener('click', () => {
-        ellenorzo = false;
         //title
+        let jocim = false;
         let cim = document.getElementById('ebooktitle');
         if (cim.value != "") {
             joAdat(cim);
+            jocim = true;
         }
-        else
+        else {
             rosszAdat(cim);
+            jocim = false;
+        }
         //price
+        let joar = false;
         let ar = document.getElementById('ebookprice');
         if (parseInt(ar.value) > -1) {
             joAdat(ar);
+            joar = true;
         }
-        else
+        else {
             rosszAdat(ar);
+            joar = false;
+        }
         //isbn
         let joazonosito = false;
         let azonosito = document.getElementById('ebookisbn');
@@ -47,13 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
             joazonosito = false;
         }
         //size
+        let jomeret = false;
         let size = document.getElementById('ebooksize');
         if (parseInt(size.value) > 0) {
             joAdat(size);
+            jomeret = true;
         }
-        else
+        else {
             rosszAdat(size);
-        if (ellenorzo && joazonosito) {
+            jomeret = false;
+        }
+        if (jocim && joar && joazonosito && jomeret) {
             console.log("sikeres ebook");
             konyvek.push(new Ebook_1.Ebook(cim.value, parseInt(ar.value), azonosito.value, parseInt(size.value)));
             cim.value = "";
@@ -77,21 +87,28 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     //Papír alapú könyv ellenőrzés és feltöltés
     (_c = document.getElementById('paperbutton')) === null || _c === void 0 ? void 0 : _c.addEventListener('click', () => {
-        ellenorzo = false;
         //title
+        let jocim = false;
         let cim = document.getElementById('paperbooktitle');
         if (cim.value != "") {
             joAdat(cim);
+            jocim = true;
         }
-        else
+        else {
             rosszAdat(cim);
+            jocim = false;
+        }
         //price
+        let joar = false;
         let ar = document.getElementById('paperbookprice');
         if (parseInt(ar.value) > -1) {
             joAdat(ar);
+            joar = true;
         }
-        else
+        else {
             rosszAdat(ar);
+            joar = false;
+        }
         //isbn
         let joazonosito = false;
         let azonosito = document.getElementById('paperbookisbn');
@@ -104,13 +121,17 @@ document.addEventListener("DOMContentLoaded", () => {
             joazonosito = false;
         }
         //weight
+        let josuly = false;
         let suly = document.getElementById('paperbookweight');
         if (parseInt(suly.value) > 0) {
             joAdat(suly);
+            josuly = true;
         }
-        else
+        else {
             rosszAdat(suly);
-        if (ellenorzo) {
+            josuly = false;
+        }
+        if (jocim && joar && joazonosito && josuly) {
             console.log("sikeres paper");
             konyvek.push(new PaperBook_1.PaperBook(cim.value, parseInt(ar.value), azonosito.value, parseInt(suly.value)));
             cim.value = "";
@@ -135,11 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
     //rossz adat esetén piros border + ellenorzo
     function rosszAdat(adat) {
         adat.style.border = "1px solid red";
-        ellenorzo = false;
     }
     //joadat esetén alapértelmezett border + ellenorzo
     function joAdat(adat) {
         adat.style.border = "1px solid #ced4da";
-        ellenorzo = true;
     }
 });

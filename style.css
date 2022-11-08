@@ -40,3 +40,18 @@ input[type="text"], input[type="number"] {
     background-repeat: no-repeat;
     color: #fff;
 }
+
+.container {
+    background-color: lightblue;
+    width: 50%;
+    min-height: 100vh;
+}
+
+#osszesito {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#selector{
+    text-align: center;
+}
